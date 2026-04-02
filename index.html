@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Your Name] — Writer & Technical Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ink: #1a1a1a;
+  --paper: #f8f6f1;
+  --muted: #7a7468;
+  --accent: #c4503d;
+  --rule: #d6d0c4;
+  --card-bg: #ffffff;
+  --tag-bg: #eee9df;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === GRAIN OVERLAY === */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* === LAYOUT === */
+.container { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+.wide-container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+/* === HEADER === */
+header {
+  padding: 80px 0 60px;
+  border-bottom: 1px solid var(--rule);
+}
+
+header .overline {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+header h1 {
+  font-family: var(--serif);
+  font-size: clamp(42px, 7vw, 64px);
+  font-weight: 400;
+  line-height: 1.08;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+header h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+header .intro {
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 540px;
+  line-height: 1.7;
+}
+
+header .intro a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+}
+header .intro a:hover { text-decoration-color: var(--accent); }
+
+/* === NAV === */
+nav {
+  display: flex;
+  gap: 28px;
+  margin-top: 32px;
+}
+nav a {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1.5px solid transparent;
+  transition: all 0.2s;
+}
+nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+
+/* === SECTIONS === */
+section { padding: 64px 0; }
+section + section { border-top: 1px solid var(--rule); }
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 32px;
+}
+
+.section-heading {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+/* === WORK SAMPLES GRID === */
+.samples-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.sample-card {
+  background: var(--card-bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 32px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.sample-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.3s ease;
+}
+
+.sample-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+}
+.sample-card:hover::before { transform: scaleY(1); }
+
+.sample-card .card-type {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.sample-card h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.sample-card p {
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  background: var(--tag-bg);
+  color: var(--muted);
+  padding: 4px 10px;
+  border-radius: 3px;
+}
+
+.sample-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.sample-link:hover { border-color: var(--accent); }
+
+/* === SKILLS BLOCK === */
+.skills-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 24px;
+}
+
+.skill-group h4 {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.skill-group ul {
+  list-style: none;
+}
+
+.skill-group li {
+  font-size: 14.5px;
+  color: var(--muted);
+  padding: 5px 0;
+  padding-left: 16px;
+  position: relative;
+}
+
+.skill-group li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--rule);
+}
+
+/* === ABOUT === */
+.about-text {
+  font-size: 16px;
+  color: #4a4a4a;
+  max-width: 620px;
+  line-height: 1.75;
+}
+
+.about-text + .about-text { margin-top: 16px; }
+
+/* === CONTACT === */
+.contact-row {
+  display: flex;
+  gap: 32px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.contact-row a {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1.5px solid var(--rule);
+  transition: border-color 0.2s;
+}
+.contact-row a:hover { border-color: var(--accent); }
+
+/* === FOOTER === */
+footer {
+  padding: 40px 0;
+  border-top: 1px solid var(--rule);
+  text-align: center;
+}
+
+footer p {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+/* === FADE IN === */
+.fade-in {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: fadeUp 0.6s ease forwards;
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in:nth-child(1) { animation-delay: 0.05s; }
+.fade-in:nth-child(2) { animation-delay: 0.12s; }
+.fade-in:nth-child(3) { animation-delay: 0.19s; }
+.fade-in:nth-child(4) { animation-delay: 0.26s; }
+.fade-in:nth-child(5) { animation-delay: 0.33s; }
+.fade-in:nth-child(6) { animation-delay: 0.4s; }
+
+/* === RESPONSIVE === */
+@media (max-width: 640px) {
+  header { padding: 48px 0 40px; }
+  section { padding: 48px 0; }
+  .skills-columns { grid-template-columns: 1fr; gap: 28px; }
+  nav { gap: 16px; flex-wrap: wrap; }
+  .contact-row { flex-direction: column; gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="fade-in">
+      <p class="overline">Portfolio & Writing Samples</p>
+      <h1>[Your Name],<br><em>writer</em> & editor</h1>
+      <p class="intro">
+        Technical professional based in Los Angeles with a sharp editorial eye. 
+        I write clear, accurate documentation and content — and I know the difference 
+        between human prose and machine output. Currently available for 
+        <a href="#contact">writing and editorial roles</a>.
+      </p>
+      <nav>
+        <a href="#samples">Work</a>
+        <a href="#skills">Skills</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- WORK SAMPLES -->
+  <section id="samples">
+    <p class="section-label fade-in">Selected Work</p>
+
+    <div class="samples-grid">
+
+      <!-- SAMPLE 1: APA Chapter -->
+      <div class="sample-card fade-in">
+        <p class="card-type">Educational Content</p>
+        <h3>HIPAA Compliance in Telehealth: A Training Module Excerpt</h3>
+        <p>
+          A mock continuing education chapter formatted to APA 7 standards, covering 
+          patient privacy requirements in remote healthcare delivery. Includes proper 
+          heading hierarchy, in-text citations, and a full reference page.
+        </p>
+        <div class="tags">
+          <span class="tag">APA 7</span>
+          <span class="tag">Healthcare</span>
+          <span class="tag">Technical Writing</span>
+          <span class="tag">Education</span>
+        </div>
+        <a href="#" class="sample-link">Read sample →</a>
+      </div>
+
+      <!-- SAMPLE 2: Redline / Proofread -->
+      <div class="sample-card fade-in">
+        <p class="card-type">Editing & Proofreading</p>
+        <h3>Before & After: Editorial Redline of a Patient Safety Brief</h3>
+        <p>
+          A tracked-changes demonstration showing grammar corrections, citation 
+          reformatting, readability improvements, and factual accuracy verification 
+          on a medical education document.
+        </p>
+        <div class="tags">
+          <span class="tag">Proofreading</span>
+          <span class="tag">Tracked Changes</span>
+          <span class="tag">Word</span>
+          <span class="tag">Style Guide</span>
+        </div>
+        <a href="#" class="sample-link">View redline →</a>
+      </div>
+
+      <!-- SAMPLE 3: AI Detection -->
+      <div class="sample-card fade-in">
+        <p class="card-type">Media Literacy</p>
+        <h3>Detecting AI-Generated Content: A Practical Analysis</h3>
+        <p>
+          Side-by-side comparison of human-written and AI-generated healthcare content,
+          annotating the structural, stylistic, and statistical tells that distinguish 
+          the two. Written for editorial teams evaluating content authenticity.
+        </p>
+        <div class="tags">
+          <span class="tag">AI Detection</span>
+          <span class="tag">Critical Analysis</span>
+          <span class="tag">Research</span>
+        </div>
+        <a href="#" class="sample-link">Read analysis →</a>
+      </div>
+
+      <!-- SAMPLE 4: Technical to Plain Language -->
+      <div class="sample-card fade-in">
+        <p class="card-type">Content Adaptation</p>
+        <h3>From Spec to Summary: Translating Technical Concepts</h3>
+        <p>
+          Examples of taking dense technical material — API documentation, system 
+          architecture notes, regulatory language — and rewriting it as clear, 
+          accessible content for non-technical audiences.
+        </p>
+        <div class="tags">
+          <span class="tag">Plain Language</span>
+          <span class="tag">Documentation</span>
+          <span class="tag">Adaptation</span>
+        </div>
+        <a href="#" class="sample-link">View examples →</a>
+      </div>
+
+      <!-- SAMPLE 5: Presentation -->
+      <div class="sample-card fade-in">
+        <p class="card-type">Document Design</p>
+        <h3>Continuing Education Slide Deck Redesign</h3>
+        <p>
+          A before-and-after redesign of an educational PowerPoint presentation, 
+          demonstrating consistent formatting, content hierarchy, visual clarity, 
+          and alignment with professional style standards.
+        </p>
+        <div class="tags">
+          <span class="tag">PowerPoint</span>
+          <span class="tag">Layout</span>
+          <span class="tag">Visual Design</span>
+        </div>
+        <a href="#" class="sample-link">View slides →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label fade-in">Capabilities</p>
+    <h2 class="section-heading fade-in">What I bring to the table</h2>
+
+    <div class="skills-columns fade-in">
+      <div class="skill-group">
+        <h4>Writing & Editorial</h4>
+        <ul>
+          <li>Proofreading & line editing</li>
+          <li>APA 7 formatting & citation</li>
+          <li>Technical documentation</li>
+          <li>Content adaptation & plain language</li>
+          <li>Grammar, style & readability review</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Tools & Technology</h4>
+        <ul>
+          <li>Microsoft Word, PowerPoint, Excel</li>
+          <li>Tracked changes & comment workflows</li>
+          <li>AI content identification</li>
+          <li>Online research & source verification</li>
+          <li>Document design & formatting</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label fade-in">About</p>
+    <h2 class="section-heading fade-in">Background</h2>
+    <p class="about-text fade-in">
+      I'm a Los Angeles–based professional with a background in software engineering 
+      and technical communication. Over the course of [X] years building production 
+      applications, I've written hundreds of pages of documentation, proposals, and 
+      client-facing materials — and developed a deep appreciation for precision in 
+      language.
+    </p>
+    <p class="about-text fade-in">
+      My technical background gives me an edge in media literacy: I understand how 
+      AI-generated content is produced at a fundamental level, which makes me 
+      unusually effective at identifying it. I bring the same systematic attention 
+      to detail to editorial work that I bring to code review.
+    </p>
+    <p class="about-text fade-in">
+      Currently seeking writing and editorial roles where I can apply these skills 
+      in a structured, collaborative environment. California resident, available for 
+      remote work on Pacific Time.
+    </p>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label fade-in">Get in touch</p>
+    <h2 class="section-heading fade-in">Let's connect</h2>
+    <div class="contact-row fade-in">
+      <a href="mailto:your@email.com">your@email.com</a>
+      <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+      <a href="https://github.com/yourhandle" target="_blank">GitHub</a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>&copy; 2026 [Your Name]. Los Angeles, CA.</p>
+</footer>
+
+</body>
+</html>
