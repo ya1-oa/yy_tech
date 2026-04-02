@@ -8,339 +8,106 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
 :root {
-  --ink: #1a1a1a;
-  --paper: #f8f6f1;
-  --muted: #7a7468;
-  --accent: #c4503d;
-  --rule: #d6d0c4;
-  --card-bg: #ffffff;
-  --tag-bg: #eee9df;
+  --ink: #1a1a1a; --paper: #f8f6f1; --muted: #7a7468; --accent: #c4503d;
+  --rule: #d6d0c4; --card-bg: #ffffff; --tag-bg: #eee9df; --sample-bg: #fdfcfa;
   --serif: 'Instrument Serif', Georgia, serif;
   --sans: 'DM Sans', -apple-system, sans-serif;
   --mono: 'JetBrains Mono', monospace;
 }
-
 html { scroll-behavior: smooth; }
-
-body {
-  font-family: var(--sans);
-  background: var(--paper);
-  color: var(--ink);
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* === GRAIN OVERLAY === */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9999;
-}
-
-/* === LAYOUT === */
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9999; }
 .container { max-width: 780px; margin: 0 auto; padding: 0 24px; }
-.wide-container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
-
-/* === HEADER === */
-header {
-  padding: 80px 0 60px;
-  border-bottom: 1px solid var(--rule);
-}
-
-header .overline {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 16px;
-}
-
-header h1 {
-  font-family: var(--serif);
-  font-size: clamp(42px, 7vw, 64px);
-  font-weight: 400;
-  line-height: 1.08;
-  color: var(--ink);
-  margin-bottom: 20px;
-}
-
-header h1 em {
-  font-style: italic;
-  color: var(--accent);
-}
-
-header .intro {
-  font-size: 17px;
-  color: var(--muted);
-  max-width: 540px;
-  line-height: 1.7;
-}
-
-header .intro a {
-  color: var(--ink);
-  text-decoration: underline;
-  text-decoration-color: var(--rule);
-  text-underline-offset: 3px;
-  transition: text-decoration-color 0.2s;
-}
+header { padding: 80px 0 60px; border-bottom: 1px solid var(--rule); }
+header .overline { font-family: var(--mono); font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+header h1 { font-family: var(--serif); font-size: clamp(42px, 7vw, 64px); font-weight: 400; line-height: 1.08; color: var(--ink); margin-bottom: 20px; }
+header h1 em { font-style: italic; color: var(--accent); }
+header .intro { font-size: 17px; color: var(--muted); max-width: 560px; line-height: 1.7; }
+header .intro a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; transition: text-decoration-color 0.2s; }
 header .intro a:hover { text-decoration-color: var(--accent); }
-
-/* === NAV === */
-nav {
-  display: flex;
-  gap: 28px;
-  margin-top: 32px;
-}
-nav a {
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-decoration: none;
-  padding-bottom: 2px;
-  border-bottom: 1.5px solid transparent;
-  transition: all 0.2s;
-}
+nav { display: flex; gap: 28px; margin-top: 32px; }
+nav a { font-family: var(--mono); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); text-decoration: none; padding-bottom: 2px; border-bottom: 1.5px solid transparent; transition: all 0.2s; }
 nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
-
-/* === SECTIONS === */
 section { padding: 64px 0; }
 section + section { border-top: 1px solid var(--rule); }
-
-.section-label {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 32px;
-}
-
-.section-heading {
-  font-family: var(--serif);
-  font-size: 32px;
-  font-weight: 400;
-  margin-bottom: 16px;
-}
-
-/* === WORK SAMPLES GRID === */
-.samples-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  margin-top: 32px;
-}
-
-.sample-card {
-  background: var(--card-bg);
-  border: 1px solid var(--rule);
-  border-radius: 6px;
-  padding: 32px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.sample-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 3px;
-  height: 100%;
-  background: var(--accent);
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: transform 0.3s ease;
-}
-
-.sample-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.06);
-}
-.sample-card:hover::before { transform: scaleY(1); }
-
-.sample-card .card-type {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 12px;
-}
-
-.sample-card h3 {
-  font-family: var(--serif);
-  font-size: 22px;
-  font-weight: 400;
-  margin-bottom: 10px;
-}
-
-.sample-card p {
-  font-size: 14.5px;
-  color: var(--muted);
-  line-height: 1.65;
-  margin-bottom: 16px;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.tag {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.5px;
-  background: var(--tag-bg);
-  color: var(--muted);
-  padding: 4px 10px;
-  border-radius: 3px;
-}
-
-.sample-link {
-  display: inline-block;
-  margin-top: 12px;
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.5px;
-  color: var(--accent);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s;
-}
-.sample-link:hover { border-color: var(--accent); }
-
-/* === SKILLS BLOCK === */
-.skills-columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  margin-top: 24px;
-}
-
-.skill-group h4 {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--ink);
-  margin-bottom: 14px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--rule);
-}
-
-.skill-group ul {
-  list-style: none;
-}
-
-.skill-group li {
-  font-size: 14.5px;
-  color: var(--muted);
-  padding: 5px 0;
-  padding-left: 16px;
-  position: relative;
-}
-
-.skill-group li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--rule);
-}
-
-/* === ABOUT === */
-.about-text {
-  font-size: 16px;
-  color: #4a4a4a;
-  max-width: 620px;
-  line-height: 1.75;
-}
-
+.section-label { font-family: var(--mono); font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; }
+.section-heading { font-family: var(--serif); font-size: 32px; font-weight: 400; margin-bottom: 16px; }
+.samples-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
+.sample-card { background: var(--card-bg); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; transition: box-shadow 0.25s ease; }
+.sample-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
+.card-header { padding: 32px; cursor: pointer; position: relative; user-select: none; }
+.card-header::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--accent); transform: scaleY(0); transform-origin: top; transition: transform 0.3s ease; }
+.sample-card:hover .card-header::before, .sample-card.open .card-header::before { transform: scaleY(1); }
+.card-type { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.card-header h3 { font-family: var(--serif); font-size: 22px; font-weight: 400; margin-bottom: 10px; }
+.card-header p { font-size: 14.5px; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.5px; background: var(--tag-bg); color: var(--muted); padding: 4px 10px; border-radius: 3px; }
+.expand-toggle { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.5px; color: var(--accent); border: none; background: none; cursor: pointer; padding: 0; transition: opacity 0.2s; }
+.expand-toggle:hover { opacity: 0.7; }
+.expand-toggle .arrow { display: inline-block; transition: transform 0.3s ease; font-size: 14px; }
+.sample-card.open .expand-toggle .arrow { transform: rotate(90deg); }
+.sample-content { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+.sample-card.open .sample-content { max-height: 6000px; }
+.sample-body { padding: 0 32px 36px; border-top: 1px solid var(--rule); }
+.sample-body .reading-label { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin: 24px 0 16px; }
+.sample-body h4 { font-family: var(--serif); font-size: 19px; font-weight: 400; margin: 24px 0 10px; color: var(--ink); }
+.sample-body h5 { font-family: var(--sans); font-size: 14px; font-weight: 600; margin: 20px 0 8px; color: var(--ink); }
+.sample-body p, .sample-body li { font-size: 14.5px; color: #4a4540; line-height: 1.75; margin-bottom: 10px; }
+.sample-body ul, .sample-body ol { padding-left: 20px; margin-bottom: 12px; }
+.sample-body li { margin-bottom: 6px; }
+.sample-body blockquote { border-left: 3px solid var(--accent); margin: 20px 0; padding: 12px 20px; background: var(--sample-bg); border-radius: 0 4px 4px 0; }
+.sample-body blockquote p { font-style: italic; color: var(--muted); margin: 0; font-size: 13.5px; }
+.redline { background: #fef2f0; border-radius: 4px; padding: 20px 24px; margin: 16px 0; font-size: 14px; line-height: 1.8; }
+.redline del { background: #fdd; color: #a33; text-decoration: line-through; padding: 1px 3px; border-radius: 2px; }
+.redline ins { background: #dfd; color: #2a6; text-decoration: none; padding: 1px 3px; border-radius: 2px; }
+.redline .comment { display: block; margin-top: 8px; font-family: var(--mono); font-size: 11px; color: var(--accent); padding-left: 16px; border-left: 2px solid var(--accent); }
+.comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.comparison-col { background: var(--sample-bg); border: 1px solid var(--rule); border-radius: 4px; padding: 20px; }
+.comparison-col .col-label { font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.comparison-col p { font-size: 13.5px; line-height: 1.7; }
+.annotation { background: #fffbeb; border-left: 3px solid #d4a017; padding: 10px 16px; margin: 8px 0; border-radius: 0 4px 4px 0; }
+.annotation p { font-size: 12.5px; color: #6b5c00; margin: 0; }
+.annotation strong { font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+.clause-box { background: #f6f5f2; border: 1px solid var(--rule); border-radius: 4px; padding: 20px 24px; margin: 16px 0; font-size: 13.5px; line-height: 1.8; color: #3a3a3a; }
+.clause-box .clause-label { font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; display: block; }
+.skills-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 24px; }
+.skill-group h4 { font-family: var(--mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+.skill-group ul { list-style: none; }
+.skill-group li { font-size: 14.5px; color: var(--muted); padding: 5px 0 5px 16px; position: relative; }
+.skill-group li::before { content: '\2014'; position: absolute; left: 0; color: var(--rule); }
+.about-text { font-size: 16px; color: #4a4a4a; max-width: 620px; line-height: 1.75; }
 .about-text + .about-text { margin-top: 16px; }
-
-/* === CONTACT === */
-.contact-row {
-  display: flex;
-  gap: 32px;
-  margin-top: 24px;
-  flex-wrap: wrap;
-}
-
-.contact-row a {
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--ink);
-  text-decoration: none;
-  padding-bottom: 2px;
-  border-bottom: 1.5px solid var(--rule);
-  transition: border-color 0.2s;
-}
+.contact-row { display: flex; gap: 32px; margin-top: 24px; flex-wrap: wrap; }
+.contact-row a { font-family: var(--mono); font-size: 13px; color: var(--ink); text-decoration: none; padding-bottom: 2px; border-bottom: 1.5px solid var(--rule); transition: border-color 0.2s; }
 .contact-row a:hover { border-color: var(--accent); }
-
-/* === FOOTER === */
-footer {
-  padding: 40px 0;
-  border-top: 1px solid var(--rule);
-  text-align: center;
-}
-
-footer p {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 1px;
-  color: var(--muted);
-}
-
-/* === FADE IN === */
-.fade-in {
-  opacity: 0;
-  transform: translateY(18px);
-  animation: fadeUp 0.6s ease forwards;
-}
-
-@keyframes fadeUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in:nth-child(1) { animation-delay: 0.05s; }
-.fade-in:nth-child(2) { animation-delay: 0.12s; }
-.fade-in:nth-child(3) { animation-delay: 0.19s; }
-.fade-in:nth-child(4) { animation-delay: 0.26s; }
-.fade-in:nth-child(5) { animation-delay: 0.33s; }
-.fade-in:nth-child(6) { animation-delay: 0.4s; }
-
-/* === RESPONSIVE === */
-@media (max-width: 640px) {
-  header { padding: 48px 0 40px; }
-  section { padding: 48px 0; }
+footer { padding: 40px 0; border-top: 1px solid var(--rule); text-align: center; }
+footer p { font-family: var(--mono); font-size: 11px; letter-spacing: 1px; color: var(--muted); }
+.fade-in { opacity: 0; transform: translateY(18px); animation: fadeUp 0.6s ease forwards; }
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+.fade-in:nth-child(1) { animation-delay: 0.05s; } .fade-in:nth-child(2) { animation-delay: 0.12s; }
+.fade-in:nth-child(3) { animation-delay: 0.19s; } .fade-in:nth-child(4) { animation-delay: 0.26s; }
+.fade-in:nth-child(5) { animation-delay: 0.33s; } .fade-in:nth-child(6) { animation-delay: 0.4s; }
+@media (max-width: 700px) {
+  header { padding: 48px 0 40px; } section { padding: 48px 0; }
   .skills-columns { grid-template-columns: 1fr; gap: 28px; }
-  nav { gap: 16px; flex-wrap: wrap; }
-  .contact-row { flex-direction: column; gap: 16px; }
+  nav { gap: 16px; flex-wrap: wrap; } .contact-row { flex-direction: column; gap: 16px; }
+  .comparison-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
-
 <div class="container">
 
-  <!-- HEADER -->
   <header>
     <div class="fade-in">
       <p class="overline">Portfolio & Writing Samples</p>
-      <h1>[Your Name],<br><em>writer</em> & editor</h1>
+      <h1>Yakir Yaacov,<br><em>writer</em> & editor</h1>
       <p class="intro">
-        Technical professional based in Los Angeles with a sharp editorial eye. 
-        I write clear, accurate documentation and content — and I know the difference 
-        between human prose and machine output. Currently available for 
-        <a href="#contact">writing and editorial roles</a>.
+        Los Angeles–based writer and technical editor. I draft contracts, edit documentation,
+        and make complicated things readable. My background in software gives me an unusual edge
+        in research, accuracy, and spotting machine-generated content.
       </p>
       <nav>
         <a href="#samples">Work</a>
@@ -351,156 +118,278 @@ footer p {
     </div>
   </header>
 
-  <!-- WORK SAMPLES -->
   <section id="samples">
     <p class="section-label fade-in">Selected Work</p>
-
     <div class="samples-grid">
 
-      <!-- SAMPLE 1: APA Chapter -->
-      <div class="sample-card fade-in">
-        <p class="card-type">Educational Content</p>
-        <h3>HIPAA Compliance in Telehealth: A Training Module Excerpt</h3>
-        <p>
-          A mock continuing education chapter formatted to APA 7 standards, covering 
-          patient privacy requirements in remote healthcare delivery. Includes proper 
-          heading hierarchy, in-text citations, and a full reference page.
-        </p>
-        <div class="tags">
-          <span class="tag">APA 7</span>
-          <span class="tag">Healthcare</span>
-          <span class="tag">Technical Writing</span>
-          <span class="tag">Education</span>
+      <!-- ======== 1: CONTRACT WRITING ======== -->
+      <div class="sample-card fade-in" id="sample-contracts">
+        <div class="card-header" onclick="toggleCard('sample-contracts')">
+          <p class="card-type">Contract & Legal Writing</p>
+          <h3>Independent Contractor Agreement &amp; Statement of Work</h3>
+          <p>Excerpts from a production contractor agreement I drafted for a mobile application development engagement — including scope management clauses, milestone structures, and risk allocation language.</p>
+          <div class="tags">
+            <span class="tag">Legal Writing</span><span class="tag">Scope Management</span><span class="tag">Contracts</span><span class="tag">Plain Language</span>
+          </div>
+          <button class="expand-toggle"><span class="arrow">&#9654;</span> Read sample</button>
         </div>
-        <a href="#" class="sample-link">Read sample →</a>
+        <div class="sample-content"><div class="sample-body">
+          <p class="reading-label">Full Sample</p>
+          <h4>Context</h4>
+          <p>When I take on contract software work, I write my own agreements from scratch. Most developers use boilerplate templates or skip the paperwork entirely. I treat contracts as a writing problem — the language has to protect both parties, but it also has to be readable by a non-lawyer client who needs to actually understand what they're agreeing to. Below are excerpts from a real agreement (client details redacted).</p>
+
+          <h4>Excerpt: Change Requests &amp; Scope Management</h4>
+          <div class="clause-box">
+            <span class="clause-label">Section 10 — Change Request Process</span>
+            <p>The scope of work defined in this Statement of Work represents the agreed-upon project deliverables. Any changes, additions, or modifications to this scope must be handled through the formal change request process.</p>
+            <p style="margin-top:12px">Either party may propose a change by submitting a written change request describing the proposed modification and its business justification. The Contractor shall evaluate the change request within three (3) business days and provide a written assessment including estimated hours, cost impact, and timeline impact.</p>
+            <p style="margin-top:12px">If the change requires additional hours beyond the project cap, both parties must agree to the additional compensation in writing before work proceeds. Approved changes shall be documented in a signed change order that amends this Statement of Work.</p>
+          </div>
+
+          <h4>Excerpt: Scope Clarification vs. Change</h4>
+          <div class="clause-box">
+            <span class="clause-label">Section 10 — Distinction</span>
+            <p>Reasonable clarifications of ambiguous requirements within the existing scope do not constitute changes and will be handled through normal project communication. However, additions of new features, modifications to agreed-upon functionality, or expansions of deliverable specifications require change orders.</p>
+          </div>
+
+          <h4>Excerpt: Risk Allocation</h4>
+          <div class="clause-box">
+            <span class="clause-label">Section 14.1 — Development Risks</span>
+            <p>Software development inherently involves uncertainties. While the Contractor will use professional best practices and reasonable efforts to meet all milestones, the following risks are acknowledged:</p>
+            <p style="margin-top:12px"><strong>Third-Party Dependencies:</strong> The application relies on third-party services and platforms. Changes, outages, or issues with these services may impact development timelines or functionality.</p>
+            <p style="margin-top:12px"><strong>Security Disclaimer:</strong> While the Contractor will implement industry-standard security practices, no software can be guaranteed to be completely secure. The Client is responsible for ongoing security monitoring and updates post-delivery unless caused by defects present at delivery.</p>
+          </div>
+
+          <h4>Writing Notes</h4>
+          <p>The challenge in contract drafting is balancing legal protection with readability. A client who doesn't understand their contract won't follow its processes, which defeats the purpose. I write in plain English where I can, use defined terms only when they add precision, and break dense clauses into smaller paragraphs with descriptive headers. The goal is a document you can navigate without a law degree.</p>
+        </div></div>
       </div>
 
-      <!-- SAMPLE 2: Redline / Proofread -->
-      <div class="sample-card fade-in">
-        <p class="card-type">Editing & Proofreading</p>
-        <h3>Before & After: Editorial Redline of a Patient Safety Brief</h3>
-        <p>
-          A tracked-changes demonstration showing grammar corrections, citation 
-          reformatting, readability improvements, and factual accuracy verification 
-          on a medical education document.
-        </p>
-        <div class="tags">
-          <span class="tag">Proofreading</span>
-          <span class="tag">Tracked Changes</span>
-          <span class="tag">Word</span>
-          <span class="tag">Style Guide</span>
+      <!-- ======== 2: INSURANCE PROCESS DOC ======== -->
+      <div class="sample-card fade-in" id="sample-insurance">
+        <div class="card-header" onclick="toggleCard('sample-insurance')">
+          <p class="card-type">Process Documentation</p>
+          <h3>Insurance Claims Workflow: Temporary Housing &amp; ALE</h3>
+          <p>A step-by-step breakdown of the Additional Living Expenses insurance claims process — written for property managers and landlords who need to understand adjuster timelines, documentation requirements, and common pitfalls.</p>
+          <div class="tags">
+            <span class="tag">Insurance</span><span class="tag">Process Writing</span><span class="tag">Plain Language</span><span class="tag">Instructional</span>
+          </div>
+          <button class="expand-toggle"><span class="arrow">&#9654;</span> Read sample</button>
         </div>
-        <a href="#" class="sample-link">View redline →</a>
+        <div class="sample-content"><div class="sample-body">
+          <p class="reading-label">Full Sample</p>
+          <h4>Context</h4>
+          <p>Insurance claims for temporary housing involve a chain of documentation requirements that most landlords and tenants don't understand until something goes wrong. I wrote this guide after navigating the process firsthand — dealing with adjusters, reviewing lease structures, and learning what triggers a file to move from "routine" to "problem claim." The audience is someone who has never dealt with insurance-funded tenancies before.</p>
+
+          <h4>How ALE Claims Work</h4>
+          <h5>Phase 1: Initial Authorization</h5>
+          <p>When a policyholder's home becomes uninhabitable, the insurance company assigns an adjuster to evaluate the claim. The adjuster determines whether the policyholder qualifies for Additional Living Expenses coverage, reviews comparable rental rates in the area, establishes a reasonable budget, and provides verbal approval with specific limits. For most metro areas, the initial approval covers 90 days and is renewable based on documented repair progress.</p>
+
+          <h5>Phase 2: Documentation Before Payment</h5>
+          <p>No payment is processed without four documents. A signed lease agreement with start and end dates within the approved period and rent at or below the authorized rate. A W-9 tax form from the landlord — the IRS requires this for any payment exceeding $600 per year. A monthly invoice on landlord letterhead referencing the claim number with clear billing periods. And proof of occupancy: utility bills, mail forwarding, or move-in inspection photos.</p>
+
+          <h5>Phase 3: The Monthly Cycle</h5>
+          <p>Once documentation is in order, the monthly process is straightforward. Invoice arrives by the 5th, the adjuster cross-references it against the lease, payment processes within 10 to 15 business days. A clean file takes an adjuster about 15 minutes per month. A file with missing documentation or date discrepancies can consume 2 to 5 hours of back-and-forth and delays payment for everyone involved.</p>
+
+          <h5>Common Pitfalls</h5>
+          <p>The most frequent problem is late documentation. A lease signed 20 days after occupancy begins isn't unusual in temporary housing — most adjusters expect some gap between move-in and paperwork. But a lease submitted 45 days late triggers scrutiny. The file gets flagged, a supervisor gets involved, and the claim moves from "low-touch" to "problem" status. That distinction matters: problem claims face longer review timelines and more frequent requests for supporting evidence.</p>
+          <p>The second issue is date misalignment. If the lease says December 1 but the adjuster only authorized from December 15, the landlord won't be paid for those first two weeks. Always confirm authorization dates before signing.</p>
+
+          <h4>Writing Notes</h4>
+          <p>Insurance documentation is full of jargon and implicit processes that insiders take for granted. The job of the writer is to make the invisible visible — lay out the steps in the order they actually happen, name the specific documents, and explain what goes wrong when they're missing. This piece works because it respects the reader's time and doesn't assume prior knowledge.</p>
+        </div></div>
       </div>
 
-      <!-- SAMPLE 3: AI Detection -->
-      <div class="sample-card fade-in">
-        <p class="card-type">Media Literacy</p>
-        <h3>Detecting AI-Generated Content: A Practical Analysis</h3>
-        <p>
-          Side-by-side comparison of human-written and AI-generated healthcare content,
-          annotating the structural, stylistic, and statistical tells that distinguish 
-          the two. Written for editorial teams evaluating content authenticity.
-        </p>
-        <div class="tags">
-          <span class="tag">AI Detection</span>
-          <span class="tag">Critical Analysis</span>
-          <span class="tag">Research</span>
+      <!-- ======== 3: REDLINE ======== -->
+      <div class="sample-card fade-in" id="sample-redline">
+        <div class="card-header" onclick="toggleCard('sample-redline')">
+          <p class="card-type">Editing &amp; Proofreading</p>
+          <h3>Editorial Redline: Cleaning Up a Service Agreement</h3>
+          <p>A before-and-after demonstration of editorial revision on a service contract — correcting grammar, tightening language, improving clarity, and flagging ambiguity that could cause disputes.</p>
+          <div class="tags">
+            <span class="tag">Proofreading</span><span class="tag">Tracked Changes</span><span class="tag">Clarity</span><span class="tag">Legal Review</span>
+          </div>
+          <button class="expand-toggle"><span class="arrow">&#9654;</span> Read sample</button>
         </div>
-        <a href="#" class="sample-link">Read analysis →</a>
+        <div class="sample-content"><div class="sample-body">
+          <p class="reading-label">Full Sample</p>
+          <h4>Context</h4>
+          <p>Contract language suffers from the same problems as any other writing: run-on sentences, passive voice, ambiguous pronoun references, and inconsistent terminology. Below is a simulated excerpt showing how I approach a redline pass — catching not just grammatical errors but structural issues that affect enforceability.</p>
+
+          <h4>Pass 1: Grammar &amp; Style</h4>
+          <div class="redline">
+            <p>The contractor <del>will be responsible for and shall handle</del> <ins>is responsible for</ins> all taxes, withholdings, and other <del>statutory or contractual obligations of any sort, including but not limited to</del> <ins>statutory obligations, including</ins> workers' compensation insurance and unemployment insurance.</p>
+            <span class="comment">Redundant phrasing collapsed. "Of any sort" is filler. "Including but not limited to" shortened to "including" — courts interpret these identically.</span>
+          </div>
+          <div class="redline" style="margin-top:16px">
+            <p>Late payments <del>shall accrue interest at a rate of 1.5% per month or the maximum rate permitted by applicable law, whichever is less, and will be charged starting from the date of the</del> <ins>accrue interest at 1.5% per month (or the legal maximum, whichever is less) beginning on the</ins> original due date.</p>
+            <span class="comment">38 words reduced to 22 without losing legal meaning. Parenthetical reads more naturally than a nested clause.</span>
+          </div>
+
+          <h4>Pass 2: Ambiguity Flags</h4>
+          <div class="redline">
+            <p>The Contractor shall provide <del>their</del> <ins>the Contractor's</ins> own tools, equipment, and workspace necessary to complete the Services.</p>
+            <span class="comment">Pronoun reference is ambiguous in a two-party contract — "their" could refer to either party. Replacing with the defined term removes doubt. Minor, but these add up in disputes.</span>
+          </div>
+          <div class="redline" style="margin-top:16px">
+            <p>Either party may terminate this Agreement upon fourteen (14) days written notice to the other party. <ins>[FLAG: "Written notice" is undefined. Recommend adding a Notices section specifying delivery methods — email, certified mail — and when notice is deemed received.]</ins></p>
+            <span class="comment">Not a grammar issue. A termination clause without a defined notice mechanism is a dispute waiting to happen.</span>
+          </div>
+
+          <h4>Writing Notes</h4>
+          <p>A good redline isn't just about catching typos. It's about reading the document the way an adversary would — looking for ambiguity, redundancy, and gaps that create risk. The grammar corrections are table stakes. The value is in the flags that prevent a problem six months from now.</p>
+        </div></div>
       </div>
 
-      <!-- SAMPLE 4: Technical to Plain Language -->
-      <div class="sample-card fade-in">
-        <p class="card-type">Content Adaptation</p>
-        <h3>From Spec to Summary: Translating Technical Concepts</h3>
-        <p>
-          Examples of taking dense technical material — API documentation, system 
-          architecture notes, regulatory language — and rewriting it as clear, 
-          accessible content for non-technical audiences.
-        </p>
-        <div class="tags">
-          <span class="tag">Plain Language</span>
-          <span class="tag">Documentation</span>
-          <span class="tag">Adaptation</span>
+      <!-- ======== 4: AI DETECTION ======== -->
+      <div class="sample-card fade-in" id="sample-ai">
+        <div class="card-header" onclick="toggleCard('sample-ai')">
+          <p class="card-type">Media Literacy &amp; Analysis</p>
+          <h3>Identifying AI-Generated Content: A Practical Framework</h3>
+          <p>A side-by-side analysis of human-written and machine-generated text, annotating the structural and stylistic patterns that distinguish them — written for editorial teams evaluating content submissions.</p>
+          <div class="tags">
+            <span class="tag">AI Detection</span><span class="tag">Critical Analysis</span><span class="tag">Media Literacy</span>
+          </div>
+          <button class="expand-toggle"><span class="arrow">&#9654;</span> Read sample</button>
         </div>
-        <a href="#" class="sample-link">View examples →</a>
+        <div class="sample-content"><div class="sample-body">
+          <p class="reading-label">Full Sample</p>
+          <h4>Context</h4>
+          <p>Automated detection tools are unreliable — they flag human writing as AI and miss obvious machine output. For editorial teams reviewing submissions, a trained human eye is still the most dependable filter. This framework is based on structural patterns I've observed working directly with language models as a software engineer. Not guesswork. An understanding of how these systems actually generate text.</p>
+
+          <h4>Side-by-Side: Same Topic, Different Origin</h4>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Topic: "Explain why documentation matters in software development."</p>
+          <div class="comparison-grid">
+            <div class="comparison-col">
+              <p class="col-label">Text A</p>
+              <p>Documentation is a critical component of the software development lifecycle. It serves as a comprehensive guide for developers, stakeholders, and end-users alike, ensuring that everyone has a clear understanding of the system's architecture, functionality, and purpose. Well-maintained documentation reduces onboarding time, minimizes miscommunication, and provides a reliable reference for future development efforts. In today's fast-paced development environments, investing in thorough documentation is not just best practice — it's essential for long-term success.</p>
+            </div>
+            <div class="comparison-col">
+              <p class="col-label">Text B</p>
+              <p>I once spent three days debugging a payment integration because the original developer left zero comments and no README. The function names were single letters. There was a file called <em>misc2.js</em> that turned out to be the entire authentication layer. I've written docs on every project since — not because anyone asked, but because I never want to be the reason someone else loses a weekend to a file called <em>misc2.js.</em></p>
+            </div>
+          </div>
+
+          <h4>Analysis</h4>
+          <div class="annotation">
+            <p><strong>Tell #1: Hedged Universality</strong></p>
+            <p>Text A opens with a thesis statement that sounds authoritative but commits to nothing specific. "Critical component of the software development lifecycle" optimizes for being technically correct while saying very little. Human writers with real experience lead with specifics, not abstractions.</p>
+          </div>
+          <div class="annotation">
+            <p><strong>Tell #2: Tricolon Lists</strong></p>
+            <p>"Developers, stakeholders, and end-users alike." "Architecture, functionality, and purpose." "Reduces onboarding time, minimizes miscommunication, and provides a reliable reference." Language models default to groups of three. Human writers vary their rhythm — sometimes two items, sometimes four, sometimes a parenthetical aside that breaks the structure entirely.</p>
+          </div>
+          <div class="annotation">
+            <p><strong>Tell #3: Absence of Friction</strong></p>
+            <p>Text A has no rough edges. No half-finished thought that pivots. Real writing has texture — asides, self-corrections, moments where the writer's personality interrupts the structure. Text B has a wry aside about <em>misc2.js</em> that no language model would produce unprompted, because it requires specific, emotionally charged memory.</p>
+          </div>
+          <div class="annotation">
+            <p><strong>Tell #4: The Closing Formula</strong></p>
+            <p>"In today's fast-paced [X], investing in [Y] is not just [Z] — it's essential for [W]." This sentence structure is near-signature generated content. It sounds conclusive without concluding anything. A human writer either makes a specific recommendation or just stops when they're done.</p>
+          </div>
+
+          <h4>Practical Takeaways</h4>
+          <p>Don't rely on a single tell. Flag content showing three or more patterns in combination: tricolon lists, hedged thesis statements, absence of anecdotes, formulaic closings, uniform paragraph length. Then read it aloud. Generated text sounds smooth in a way human writing rarely does — it lacks the small hesitations and surprises that make prose feel like it came from someone who was actually thinking while they wrote.</p>
+        </div></div>
       </div>
 
-      <!-- SAMPLE 5: Presentation -->
-      <div class="sample-card fade-in">
-        <p class="card-type">Document Design</p>
-        <h3>Continuing Education Slide Deck Redesign</h3>
-        <p>
-          A before-and-after redesign of an educational PowerPoint presentation, 
-          demonstrating consistent formatting, content hierarchy, visual clarity, 
-          and alignment with professional style standards.
-        </p>
-        <div class="tags">
-          <span class="tag">PowerPoint</span>
-          <span class="tag">Layout</span>
-          <span class="tag">Visual Design</span>
+      <!-- ======== 5: TECH TO PLAIN LANGUAGE ======== -->
+      <div class="sample-card fade-in" id="sample-translation">
+        <div class="card-header" onclick="toggleCard('sample-translation')">
+          <p class="card-type">Content Adaptation</p>
+          <h3>Technical to Plain Language: Rewriting for Readability</h3>
+          <p>Paired examples showing how I translate dense technical or legal material into clear, accessible prose for non-specialist audiences — without losing accuracy.</p>
+          <div class="tags">
+            <span class="tag">Plain Language</span><span class="tag">Adaptation</span><span class="tag">Documentation</span><span class="tag">Accessibility</span>
+          </div>
+          <button class="expand-toggle"><span class="arrow">&#9654;</span> Read sample</button>
         </div>
-        <a href="#" class="sample-link">View slides →</a>
+        <div class="sample-content"><div class="sample-body">
+          <p class="reading-label">Full Sample</p>
+          <h4>Context</h4>
+          <p>Most technical writing fails not because it's wrong but because it was written for the author instead of the reader. These examples are drawn from real documentation I've revised — taking language that made sense to the person who wrote it and rewriting it for the person who needs to use it.</p>
+
+          <h4>Example 1: API Error Documentation</h4>
+          <div class="comparison-grid">
+            <div class="comparison-col">
+              <p class="col-label">Before</p>
+              <p>Error 429 indicates rate limiting has been triggered on the endpoint. The client should implement exponential backoff with jitter, respecting the Retry-After header value returned in the response. Persistent 429 responses may indicate the need to request a higher rate limit tier via the developer portal.</p>
+            </div>
+            <div class="comparison-col">
+              <p class="col-label">After (for non-technical stakeholders)</p>
+              <p>If you see a "429" error, it means the system received too many requests in a short period and temporarily paused new ones. The system includes a wait time in its response — your application should pause for that duration before trying again. If these errors happen often, contact the dev team about increasing your request allowance.</p>
+            </div>
+          </div>
+
+          <h4>Example 2: Insurance Policy Clause</h4>
+          <div class="comparison-grid">
+            <div class="comparison-col">
+              <p class="col-label">Before</p>
+              <p>The insured shall be indemnified for Additional Living Expenses incurred as a direct result of a covered peril rendering the insured premises uninhabitable, subject to the sublimit specified in the Declarations page, and contingent upon the insured's ongoing obligation to mitigate said expenses by securing reasonable temporary accommodations.</p>
+            </div>
+            <div class="comparison-col">
+              <p class="col-label">After (for policyholders)</p>
+              <p>If your home is damaged by something your policy covers and you can't live in it, we'll help pay for a temporary place to stay. There's a maximum amount listed on your policy's Declarations page. We ask that you choose a reasonably priced option — we'll cover a normal rental, but not a luxury suite when a standard apartment would work.</p>
+            </div>
+          </div>
+
+          <h4>Example 3: Project Scope Language</h4>
+          <div class="comparison-grid">
+            <div class="comparison-col">
+              <p class="col-label">Before</p>
+              <p>The deliverable shall encompass a production-ready iOS application featuring user registration with phone/email verification and TCPA-compliant opt-in, contact integration and group creation, user profiles and settings management, core navigation and UI implementation, backend API with user management, and performance monitoring setup.</p>
+            </div>
+            <div class="comparison-col">
+              <p class="col-label">After (for the client)</p>
+              <p>In the first phase, I'll build the foundation of your iPhone app: users can sign up with their phone number or email, create groups by importing contacts, and manage their profile. Behind the scenes, I'll set up the server that powers everything and add monitoring so we can see how the app performs from day one. All messaging follows federal texting regulations, so you're compliant from launch.</p>
+            </div>
+          </div>
+
+          <h4>Writing Notes</h4>
+          <p>The pattern across all three: replace abstractions with specifics, replace passive voice with active, replace jargon with the concept behind it. The original writers weren't wrong — they were writing for themselves. The revision redirects the same information toward the person who actually needs it. Nothing is dumbed down. The accuracy is identical. The audience changed.</p>
+        </div></div>
       </div>
 
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section id="skills">
     <p class="section-label fade-in">Capabilities</p>
-    <h2 class="section-heading fade-in">What I bring to the table</h2>
-
+    <h2 class="section-heading fade-in">What I bring</h2>
     <div class="skills-columns fade-in">
       <div class="skill-group">
-        <h4>Writing & Editorial</h4>
+        <h4>Writing &amp; Editorial</h4>
         <ul>
-          <li>Proofreading & line editing</li>
-          <li>APA 7 formatting & citation</li>
+          <li>Contract &amp; legal document drafting</li>
+          <li>Proofreading &amp; line editing</li>
           <li>Technical documentation</li>
-          <li>Content adaptation & plain language</li>
-          <li>Grammar, style & readability review</li>
+          <li>Content adaptation &amp; plain language</li>
+          <li>Grammar, style &amp; readability review</li>
+          <li>APA formatting &amp; citation</li>
         </ul>
       </div>
       <div class="skill-group">
-        <h4>Tools & Technology</h4>
+        <h4>Tools &amp; Research</h4>
         <ul>
           <li>Microsoft Word, PowerPoint, Excel</li>
-          <li>Tracked changes & comment workflows</li>
-          <li>AI content identification</li>
-          <li>Online research & source verification</li>
-          <li>Document design & formatting</li>
+          <li>Tracked changes &amp; comment workflows</li>
+          <li>AI content identification &amp; analysis</li>
+          <li>Online research &amp; source verification</li>
+          <li>Document formatting &amp; layout</li>
+          <li>Process documentation</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT -->
   <section id="about">
     <p class="section-label fade-in">About</p>
     <h2 class="section-heading fade-in">Background</h2>
-    <p class="about-text fade-in">
-      I'm a Los Angeles–based professional with a background in software engineering 
-      and technical communication. Over the course of [X] years building production 
-      applications, I've written hundreds of pages of documentation, proposals, and 
-      client-facing materials — and developed a deep appreciation for precision in 
-      language.
-    </p>
-    <p class="about-text fade-in">
-      My technical background gives me an edge in media literacy: I understand how 
-      AI-generated content is produced at a fundamental level, which makes me 
-      unusually effective at identifying it. I bring the same systematic attention 
-      to detail to editorial work that I bring to code review.
-    </p>
-    <p class="about-text fade-in">
-      Currently seeking writing and editorial roles where I can apply these skills 
-      in a structured, collaborative environment. California resident, available for 
-      remote work on Pacific Time.
-    </p>
+    <p class="about-text fade-in">I'm a Los Angeles–based professional with a background in software engineering, contract development, and technical communication. Over the past several years I've written contracts, statements of work, project proposals, insurance documentation, and client-facing materials across legal, real estate, and technology engagements. Writing clearly about complicated things is what I do every day — whether the audience is an adjuster, a client, or a developer inheriting my code six months from now.</p>
+    <p class="about-text fade-in">My technical background gives me an unusual edge in media literacy and research. I understand how AI-generated content is produced at a structural level, which makes me effective at identifying it in ways that automated tools can't match. I bring the same systematic attention to editorial work that I bring to reviewing code — every word should be there for a reason.</p>
+    <p class="about-text fade-in">California resident. Available for remote work on Pacific Time.</p>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <p class="section-label fade-in">Get in touch</p>
     <h2 class="section-heading fade-in">Let's connect</h2>
@@ -512,10 +401,9 @@ footer p {
   </section>
 
 </div>
-
-<footer>
-  <p>&copy; 2026 [Your Name]. Los Angeles, CA.</p>
-</footer>
-
+<footer><p>&copy; 2026 [Your Name]. Los Angeles, CA.</p></footer>
+<script>
+function toggleCard(id) { document.getElementById(id).classList.toggle('open'); }
+</script>
 </body>
 </html>
